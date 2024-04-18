@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vincentui.hobbyapp_160421072.R
 import com.vincentui.hobbyapp_160421072.databinding.FragmentMainBinding
 import com.vincentui.hobbyapp_160421072.viewmodel.ListViewModel
 
@@ -22,7 +28,8 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMainBinding.inflate(inflater, container, false)
-
+//        val id = MainFragmentArgs.fromBundle(requireArguments()).id
+//        binding.txtHello.setText("$id")
         return binding.root
     }
 
@@ -42,6 +49,13 @@ class MainFragment : Fragment() {
             viewModel.refresh()
             binding.refreshLayout.isRefreshing = false
 
+        }
+        binding.btnProfileMain.setOnClickListener {
+            if(arguments != null) {
+                val id = MainFragmentArgs.fromBundle(requireArguments()).id
+                val action = MainFragmentDirections.actionMainFragmentToProfileFragment(id)
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
     fun observeViewModel() {

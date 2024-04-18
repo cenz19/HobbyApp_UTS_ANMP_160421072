@@ -26,7 +26,8 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "https://projectutswebprogubaya.000webhostapp.com/hobby.json"
+        val url = "https://anmp160421072.000webhostapp.com/getAllHobby.php"
+//        val url = "http://10.0.2.2/UTSANMP/getAllHobby.php"
         val stringRequest = StringRequest(
             Request.Method.GET,
             url,
@@ -35,6 +36,7 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                 Log.d("showvoley", it)
                 val sType = object : TypeToken<List<Hobby>>() { }.type
                 val result = Gson().fromJson<List<Hobby>>(it, sType)
+                Log.d("showResult", result.toString())
                 hobbyLD.value = result as ArrayList<Hobby>?
                 loadingLD.value = false
             },
@@ -44,14 +46,6 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                 loadingLD.value = false
             })
         queue?.add(stringRequest)
-
-//        hobbyLD.value = arrayListOf(
-//            Hobby(1,"Nonie","hello","5718444778","http://dummyimage.com/75x100", HobbyDetail(ArrayList())),
-//        )
-//
-//        hobbyLoadErrorLD.value = false
-//        loadingLD.value = false
-
     }
     override fun onCleared() {
         super.onCleared()

@@ -19,7 +19,8 @@
             android:id="@+id/action_welcomeFragment_to_registerFragment"
             app:destination="@id/registerFragment"
             app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -29,10 +30,12 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
-            app:popUpTo="@id/loginFragment" />
+            app:launchSingleTop="false"
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -44,7 +47,8 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -54,10 +58,42 @@
         <action
             android:id="@+id/action_mainFragment_to_mainDetailFragment"
             app:destination="@id/mainDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/mainDetailFragment"
         android:name="com.vincentui.hobbyapp_160421072.view.MainDetailFragment"
         android:label="fragment_main_detail"
-        tools:layout="@layout/fragment_main_detail" />
+        tools:layout="@layout/fragment_main_detail" >
+        <action
+            android:id="@+id/action_mainDetailFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment" />
+        <argument
+            android:name="hobby_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.vincentui.hobbyapp_160421072.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment" />
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_profileFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -1,6 +1,5 @@
 package com.vincentui.hobbyapp_160421072.view
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,7 @@ class MainAdapter(val hobbyList:ArrayList<Hobby>)
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.binding.txtMakerListItem.text = "@" + hobbyList[position].maker
-        holder.binding.txtTitleReadItem.text = hobbyList[position].title
+        holder.binding.txtTitleListItem.text = hobbyList[position].title
         holder.binding.txtShortDescListItem.text = hobbyList[position].shortdesc
 
 
@@ -54,7 +53,7 @@ class MainAdapter(val hobbyList:ArrayList<Hobby>)
                 })
 
         holder.binding.btnReadMoreListItem.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToMainDetailFragment()
+            val action = MainFragmentDirections.actionMainFragmentToMainDetailFragment(hobbyList[position].id.toString())
             Navigation.findNavController(it).navigate(action)
         }
     }
